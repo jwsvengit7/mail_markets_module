@@ -2,23 +2,26 @@ package com.jwsven.mail_markets.event_driven.listeners;
 
 
 import com.jwsven.mail_markets.domain.Mail;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-@RequiredArgsConstructor
 @Slf4j
 public class MailRequestSender implements ApplicationListener<MailRequest<Mail,String>> {
     @Qualifier("restTemplateForMail")
     private final RestTemplate restTemplateForMail;
     @Qualifier("restTemplateForApp")
     private final RestTemplate restTemplateApp;
+
+    public MailRequestSender(
+            @Qualifier("restTemplateForMail") RestTemplate restTemplateForMail,
+            @Qualifier("restTemplateForApp") RestTemplate restTemplateApp) {
+        this.restTemplateForMail = restTemplateForMail;
+        this.restTemplateApp = restTemplateApp;
+    }
 
     @Override
     public void onApplicationEvent(MailRequest<Mail,String> event) {

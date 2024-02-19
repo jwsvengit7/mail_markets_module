@@ -24,7 +24,7 @@ public class WebConfig {
     @Bean
     public RestTemplate restTemplateForMail() {
         RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = httpHeadersForMail();
+        HttpHeaders headers = httpHeadersForApp();
         log.info("===================== {} ",headers,"  =====================");
         return restTemplate;
     }
