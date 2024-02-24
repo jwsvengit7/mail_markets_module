@@ -15,7 +15,6 @@ public class MailServiceImpl implements MailService {
     private final ApplicationEventPublisher publisher;
 
     public MailServiceImpl(
-
             HttpHeaders httpHeaders,
             ApplicationEventPublisher publisher)
     {
@@ -25,7 +24,7 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public <T,K> T sendMail(T data,K url) {
+    public <T extends Mail,K> T sendMail(T data,K url) {
         publisher.publishEvent(new MailRequest<>(data,url));
         return data;
     }

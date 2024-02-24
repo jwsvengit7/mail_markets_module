@@ -60,4 +60,6 @@ public class Mail {
     public void setCc(List<String> cc) {
         this.cc = cc;
     }
+
+    
 }
